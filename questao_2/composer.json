@@ -1,0 +1,24 @@
+{
+    "name": "wjjunior/questao2",
+    "description": "Sistema de estacionamento",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "authors": [
+        {
+            "name": "Wagner Junior",
+            "email": "wagner.junior30@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wjjunior\\Estacionamento\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
