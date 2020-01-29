@@ -1,0 +1,24 @@
+{
+    "name": "wjjunior/questao1",
+    "description": "Calcula equacao do segundo grau",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "authors": [
+        {
+            "name": "Wagner Junior",
+            "email": "wagner.junior30@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wjjunior\\Calculations\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
