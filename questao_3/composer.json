@@ -1,0 +1,24 @@
+{
+    "name": "wjjunior/questao3",
+    "description": "Retorna menor preco presente na string",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "authors": [
+        {
+            "name": "Wagner Junior",
+            "email": "wagner.junior30@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wjjunior\\MelhorPreco\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
