@@ -1,0 +1,24 @@
+{
+    "name": "wjjunior/questao4",
+    "description": "Inclui bagagens e cargas vivas a passagem aérea",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "authors": [
+        {
+            "name": "Wagner Junior",
+            "email": "wagner.junior30@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Wjjunior\\PassagemAerea\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "minimum-stability": "stable",
+    "require": {}
+}
