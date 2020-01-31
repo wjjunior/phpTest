@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Pizza extends JsonResource
+class OrderPizza extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,10 @@ class Pizza extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'small' => (float) $this->small,
-            'medium' => (float) $this->medium,
-            'large' => (float) $this->large,
-            'created_at' => (string) $this->created_at
+            'pizza' => $this->name,
+            'size' => $this->pivot->size,
+            'qty' => (int) $this->pivot->qty,
+            'price' => (float) $this->{$this->pivot->size}
         ];
     }
 }

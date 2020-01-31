@@ -17,7 +17,10 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('status')->default(0);
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->integer('delivery_time');
+            $table->float('delivery_price', 2)->default(0);
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

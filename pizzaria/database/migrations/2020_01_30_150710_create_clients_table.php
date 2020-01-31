@@ -18,7 +18,6 @@ class CreateClientsTable extends Migration
             $table->string('name', 255);
             $table->string('phone_number', 20)->unique();
             $table->text('address');
-            $table->text('neighborhood')->nullable();
             $table->text('reference')->nullable();
             $table->timestamps();
         });

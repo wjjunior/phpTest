@@ -7,15 +7,17 @@ use Illuminate\Http\Response;
 use App\Pizza;
 use App\Http\Resources\Pizza as PizzaResource;
 use App\Http\Resources\PizzaCollection;
+use App\Interfaces\ControllerInterface;
+use Illuminate\Http\JsonResponse;
 
-class PizzaController extends Controller
+class PizzaController extends Controller implements ControllerInterface
 {
     /**
      * Display a listing of pizzas.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json(new PizzaCollection(Pizza::paginate()), Response::HTTP_OK);
     }
@@ -24,9 +26,9 @@ class PizzaController extends Controller
      * Store a newly created pizza in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $this->validate($request, Pizza::$createRules);
         return response()->json(new PizzaResource(Pizza::create($request->all())), Response::HTTP_CREATED);
@@ -36,9 +38,9 @@ class PizzaController extends Controller
      * Display the specified pizza.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show($id)
+    public function show(int $id): JsonResponse
     {
         return response()->json(new PizzaResource(Pizza::findOrfail($id)), Response::HTTP_CREATED);
     }
@@ -48,9 +50,9 @@ class PizzaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id): JsonResponse
     {
         $this->validate($request, Pizza::$updateRules);
         $pizza = Pizza::findOrFail($id);
@@ -62,9 +64,9 @@ class PizzaController extends Controller
      * Remove the specified pizza from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $pizza = Pizza::findOrFail($id);
         $pizza->delete();

@@ -19,7 +19,6 @@ class Client extends JsonResource
             'name' => $this->name,
             'phone_number' => $this->phone_number,
             'address' => $this->address,
-            'neighborhood' => $this->neighborhood,
             'reference' => $this->reference,
             'created_at' => (string) $this->created_at
         ];

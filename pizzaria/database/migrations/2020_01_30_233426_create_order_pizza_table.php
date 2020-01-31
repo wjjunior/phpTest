@@ -16,9 +16,11 @@ class CreateOrderPizzaTable extends Migration
         Schema::create('order_pizza', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->unsignedBigInteger('pizza_id');
-            $table->foreign('pizza_id')->references('id')->on('pizzas');
+            $table->foreign('pizza_id')->references('id')->on('pizzas')->onDelete('cascade');
+            $table->string('size', 10);
+            $table->integer('qty');
             $table->timestamps();
         });
     }

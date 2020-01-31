@@ -17,9 +17,9 @@ class CreatePizzasTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->float('price_small', 2)->nullable();
-            $table->float('price_medium', 2)->nullable();
-            $table->float('price_large', 2)->nullable();
+            $table->float('small', 2)->nullable();
+            $table->float('medium', 2)->nullable();
+            $table->float('large', 2)->nullable();
             $table->timestamps();
         });
     }

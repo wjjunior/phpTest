@@ -21,6 +21,8 @@ $router->group(['prefix' => 'clients'], function () use ($router) {
     $router->post('/', 'ClientController@store');
     $router->put('/{id}', 'ClientController@update');
     $router->delete('/{id}', 'ClientController@destroy');
+    $router->get('/{id}/orders', 'ClientController@showClientOrders');
+
 });
 
 $router->group(['prefix' => 'pizzas'], function () use ($router) {
@@ -33,11 +35,12 @@ $router->group(['prefix' => 'pizzas'], function () use ($router) {
 
 
 $router->group(['prefix' => 'orders'], function () use ($router) {
-    $router->get('/', 'OrdersController@index');
-    $router->get('/{id}', 'OrdersController@show');
-    $router->post('/', 'OrdersController@store');
-    $router->put('/{id}', 'OrdersController@update');
-    $router->delete('/{id}', 'OrdersController@destroy');
-    $router->get('/client/{id}', 'OrdersController@show_client_orders');
+    $router->get('/', 'OrderController@index');
+    $router->get('/{id}', 'OrderController@show');
+    $router->post('/', 'OrderController@store');
+    $router->put('/{id}', 'OrderController@update');
+    $router->delete('/{id}', 'OrderController@destroy');
+    $router->put('pizza/add/{id}', 'OrderController@addPizzaToOrder');
+    $router->put('pizza/remove/{id}', 'OrderController@removePizzaFromOrder');
 
 });
