@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'vagas' => [
+    'spaces' => [
         'moto' => 5,
         'carro' => 20
     ],
-    'preco' => [
+    'price' => [
         'moto' => [
             15 => 1.75,
             30 => 3.5,

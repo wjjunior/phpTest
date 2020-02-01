@@ -1,8 +1,8 @@
 <?php
 
-namespace Wjjunior\MelhorPreco\Models;
+namespace Wjjunior\BestPrice\Models;
 
-class MelhorPreco implements MelhorPrecoInterface
+class BestPrice implements BestPriceInterface
 {
     /**
      * Calcula o melhor preço encontrado em uma string
@@ -10,7 +10,7 @@ class MelhorPreco implements MelhorPrecoInterface
      * @param string $text
      * @return float
      */
-    public static function calculaMelhorPreco(string $text): float
+    public static function calculateBestPrice(string $text): float
     {
         $pattern = '/(R\$ )([0-9]+\.)?[0-9]+(,[0-9]{2})?(?= *\(.+\))?/';
 
@@ -20,10 +20,10 @@ class MelhorPreco implements MelhorPrecoInterface
             throw new \InvalidArgumentException("Nenhum preço encontrado no texto");
         }
 
-        $precos = array_map(function ($preco) {
-            return (float) str_replace(',', '.', preg_replace('/[^0-9,]+/', '', $preco));
+        $prices = array_map(function ($price) {
+            return (float) str_replace(',', '.', preg_replace('/[^0-9,]+/', '', $price));
         }, $matches[0]);
 
-        return min($precos);
+        return min($prices);
     }
 }

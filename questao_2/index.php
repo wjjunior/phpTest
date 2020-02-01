@@ -2,12 +2,12 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Wjjunior\Estacionamento\Models\Estacionamento;
-use Wjjunior\Estacionamento\Models\Veiculo;
+use Wjjunior\Parking\Models\Parking;
+use Wjjunior\Parking\Models\Vehicle;
 
 $config = include('config.php');
 
-$estacionamento = new Estacionamento($config);
+$parking = new Parking($config);
 
 echo "Estacionamento 123Milhas\n.................................\n";
 
@@ -18,13 +18,13 @@ do {
 
     switch ($opcao) {
         case 1:
-            entradaVeiculo($estacionamento);
+            vehicleEntrance($parking);
             break;
         case 2:
-            saidaVeiculo($estacionamento);
+            exitVehicle($parking);
             break;
         case 3:
-            listarVeiculos($estacionamento);
+            listVehicles($parking);
             break;
         case 9:
             die();
@@ -37,46 +37,46 @@ do {
 
 
 
-function entradaVeiculo(Estacionamento $estacionamento): void
+function vehicleEntrance(Parking $parking): void
 {
 
     do {
-        echo "Informe a placa do veículo:\n";
-        $placa = strtoupper(trim(fgets(STDIN)));
-    } while (!$estacionamento->validarPlaca($placa));
+        echo "Informe a plate do veículo:\n";
+        $plate = strtoupper(trim(fgets(STDIN)));
+    } while (!$parking->plateValidation($plate));
 
     do {
         echo "Informe o tipo do veículo (moto ou carro):\n";
-        $tipo = trim((string) fgets(STDIN));
-        if ($tipo !== "moto" && $tipo !== "carro") {
+        $type = trim((string) fgets(STDIN));
+        if ($type !== "moto" && $type !== "carro") {
             echo "Tipo inválido\n";
         }
-    } while ($tipo !== "moto" && $tipo !== "carro");
+    } while ($type !== "moto" && $type !== "carro");
 
-    $veiculo = new Veiculo($tipo, $placa);
+    $vehicle = new Vehicle($type, $plate);
 
-    echo $estacionamento->entradaVeiculo($veiculo) . ".................................\n";
+    echo $parking->vehicleEntrance($vehicle) . ".................................\n";
 }
 
-function saidaVeiculo(Estacionamento $estacionamento): void
+function exitVehicle(Parking $parking): void
 {
     do {
         echo "Informe a placa do veículo:\n";
-        $placa = strtoupper(trim(fgets(STDIN)));
-    } while (!$estacionamento->validarPlaca($placa, true));
+        $plate = strtoupper(trim(fgets(STDIN)));
+    } while (!$parking->plateValidation($plate, true));
 
-    echo $estacionamento->saidaVeiculo($placa) . ".................................\n";
+    echo $parking->exitVehicle($plate) . ".................................\n";
 }
 
-function listarVeiculos(Estacionamento $estacionamento): void
+function listVehicles(Parking $parking): void
 {
     $mask = "|%10.10s |%-10.10s | %-30.30s |\n";
     printf($mask, 'Placa', 'Tipo', 'Entrada');
 
-    foreach ($estacionamento->getVeiculosEstacionados() as $vaga) {
-        $horaEntrada = new DateTime($vaga->getHoraEntrada());
-        $veiculo = $vaga->getVeiculo();
-        printf($mask, $veiculo->getPlaca(), ucfirst($veiculo->getTipo()), $horaEntrada->format("d/m/Y - H:i:s"));
+    foreach ($parking->getParkedVehicles() as $space) {
+        $entranceHour = new DateTime($space->getEntranceHour());
+        $vehicle = $space->getVehicle();
+        printf($mask, $vehicle->getPlate(), ucfirst($vehicle->getType()), $entranceHour->format("d/m/Y - H:i:s"));
     }
 
     echo ".................................\n";

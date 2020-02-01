@@ -4,6 +4,14 @@ namespace Wjjunior\Calculations\Models;
 
 class Calculations
 {
+    /**
+     * Calculate the quadratic equation
+     *
+     * @param float $a
+     * @param float $b
+     * @param float $c
+     * @return string
+     */
     public static function quadraticEquation(float $a, float $b, float $c): string
     {
         if ($a == 0) {
