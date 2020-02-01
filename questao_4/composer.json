@@ -1,6 +1,6 @@
 {
     "name": "wjjunior/questao4",
-    "description": "Inclui bagagens e cargas vivas a passagem aérea",
+    "description": "Inclui bagagge e cargas vivas a passagem aérea",
     "type": "project",
     "require-dev": {
         "phpunit/phpunit": "^8.0"
@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Wjjunior\\PassagemAerea\\": "src/"
+            "Wjjunior\\FlightTicket\\": "src/"
         }
     },
     "scripts": {
