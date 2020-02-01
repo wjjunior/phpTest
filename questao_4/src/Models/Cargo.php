@@ -56,7 +56,7 @@ class Cargo implements CargoInterface
      *
      * @return  self
      */
-    public function setDescription($description): Cargo
+    public function setDescription(string $description): Cargo
     {
         $this->description = $description;
 

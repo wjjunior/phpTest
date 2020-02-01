@@ -38,7 +38,7 @@ class Flight implements FlightInterface
     /**
      * Get the value of code
      */
-    public function getCodigo(): string
+    public function getCode(): string
     {
         return $this->code;
     }
@@ -48,7 +48,7 @@ class Flight implements FlightInterface
      *
      * @return  self
      */
-    public function setCodigo(string $code): Flight
+    public function setCode(string $code): Flight
     {
         $this->code = $code;
 

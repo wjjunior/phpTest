@@ -6,8 +6,8 @@ use DateTime;
 
 interface FlightInterface
 {
-    public function getCodigo(): string;
-    public function setCodigo(string $code): Flight;
+    public function getCode(): string;
+    public function setCode(string $code): Flight;
     public function getCia(): string;
     public function setCia(string $cia): Flight;
     public function getDepartureAirport(): string;
