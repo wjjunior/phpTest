@@ -44,7 +44,7 @@ class ClientController extends Controller implements ControllerInterface, Client
      */
     public function show(int $id): JsonResponse
     {
-        return response()->json(new ClientResource(Client::findOrfail($id)), Response::HTTP_CREATED);
+        return response()->json(new ClientResource(Client::findOrfail($id)), Response::HTTP_OK);
     }
 
     /**

@@ -46,7 +46,7 @@ class OrderController extends Controller implements ControllerInterface
      */
     public function show(int $id): JsonResponse
     {
-        return response()->json(new OrderResource(Order::findOrfail($id)), Response::HTTP_CREATED);
+        return response()->json(new OrderResource(Order::findOrfail($id)), Response::HTTP_OK);
     }
 
     /**
@@ -114,7 +114,7 @@ class OrderController extends Controller implements ControllerInterface
         $order = Order::findOrFail($id);
         $orderPizza = $order->pizzas()->where([['pizza_id', $request->pizza_id], ['size', $request->size]])->firstOrFail();
         $orderPizza->pivot->qty -= $request->qty;
-        if ($orderPizza->pivot->qty < 0) {
+        if ($orderPizza->pivot->qty <= 0) {
             $orderPizza->delete();
         } else {
             $orderPizza->pivot->save();

@@ -42,7 +42,7 @@ class PizzaController extends Controller implements ControllerInterface
      */
     public function show(int $id): JsonResponse
     {
-        return response()->json(new PizzaResource(Pizza::findOrfail($id)), Response::HTTP_CREATED);
+        return response()->json(new PizzaResource(Pizza::findOrfail($id)), Response::HTTP_OK);
     }
 
     /**
