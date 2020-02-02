@@ -19,5 +19,13 @@ Implementa API de pizzaria:
 1. `composer install`
 2. `php -S localhost:8000 -t public`
 
+### Banco de dados
+O BD SQLITE configurado ja está com Clients e Pizzas geradas pelas seeds para demonstração, caso necessário resetar:
+`php artisan migrate:fresh`
+
 ## Testes
 `composer run test`
+
+## Observações
+1. Optei por usar Lumen por ser uma versão do Laravel otimizada para APIs em microserços;
+2. Como se trata de um teste adicionei o .env ao projeto com as configurações para teste local;
