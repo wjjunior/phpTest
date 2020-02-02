@@ -90,7 +90,7 @@ O BD SQLITE configurado ja está com Clients e Pizzas geradas pelas seeds para d
 
 ``` json
     {
-        "name": "Mr. Steve Jobs",
+        "name": "Mr. Steve Jobs"
     }
 ```
 
@@ -146,5 +146,296 @@ O BD SQLITE configurado ja está com Clients e Pizzas geradas pelas seeds para d
         "note": "Wonderland, though she knew she had but to get."
       }
     ]
+```
+
+### Pizzas Collection [/pizzas]
+
+#### List All Pizzas [GET]
+
+* Response 200 (application/json)
+
+``` json
+    [
+      {
+        "id": 1,
+        "name": "dolorem natus quaerat",
+        "description": "This did not like to try the thing at all. However, 'jury-men' would have done  just as I'd taken the highest tree in the shade: however, the moment she quite forgot you didn't     like cats.' 'Not like.",
+        "small": 83.89,
+        "medium": 93.89,
+        "large": 103.89,
+        "created_at": "2020-01-31 21:48:57"
+      }
+    ]
+```
+
+#### Create a New Pizza [POST]
+
+* Request (application/json)
+
+``` json
+    {
+	    "name": "Calabresa",
+	    "description": "Linguiça calabresa, cebola e azeitona",
+	    "small": "25",
+	    "medium": "35",
+	    "large": "45"
+    }
+```
+
+* Response 201 (application/json)
+
+    - Body
+
+``` json
+    {
+        "id": 21,
+        "name": "Calabresa",
+        "description": "Linguiça calabresa, cebola e azeitona",
+        "small": 25,
+        "medium": 35,
+        "large": 45,
+        "created_at": "2020-02-02 15:26:40"
+    }
+```
+
+#### Update a Pizza [PUT]
+
+* Request (application/json)
+
+``` json
+    {
+	    "small": 26.5,
+	    "medium": 36.5,
+	    "large": 46.5
+    }
+```
+
+* Response 200 (application/json)
+
+    - Body
+
+``` json
+    {
+        "id": 1,
+        "name": "dolorem natus quaerat",
+        "description": "This did not like to try the thing at all. However, 'jury-men' would have done just     as I'd taken the highest tree in the shade: however, the moment she quite forgot you didn't like      cats.' 'Not like.",
+        "small": 26.5,
+        "medium": 36.5,
+        "large": 46.5,
+        "created_at": "2020-01-31 21:48:57"
+    }
+```
+
+#### Delete a Pizza [DELETE]
+
+* Response 204 (application/json)
+
+### Orders Collection [/orders]
+
+#### List All Orders [GET]
+
+* Response 200 (application/json)
+
+``` json
+    [
+        {
+            "id": 1,
+            "client": "Gia Blanda",
+            "status": 0,
+            "arrival": "16:24",
+            "total": 763.91,
+            "pizzas": [
+                {
+                    "id": 1,
+                    "pizza": "dolorem natus quaerat",
+                    "size": "large",
+                    "qty": 6,
+                    "price": 46.5
+                },
+                {
+                    "id": 13,
+                    "pizza": "quidem quasi fugit",
+                    "size": "large",
+                    "qty": 6,
+                    "price": 65.06
+                },
+                {
+                    "id": 20,
+                    "pizza": "ea doloremque quos",
+                    "size": "large",
+                    "qty": 1,
+                    "price": 79.04
+                }
+            ],
+            "note": "I to get out again. Suddenly she came upon a."
+        }
+    ]
+```
+
+#### Create a New Order [POST]
+
+* Request (application/json)
+
+``` json
+    {
+	    "client_id": 9,
+	    "delivery_time": 20,
+	    "pedido": [
+		{
+		    "pizza_id": 10,
+		    "size": "medium",
+		    "qty": 1
+		},
+		{
+			"pizza_id": 9,
+			"size": "large",
+			"qty": 12
+		}
+	]
+    }
+```
+
+* Response 201 (application/json)
+
+    - Body
+
+``` json
+    {
+        "id": 22,
+        "client": "Dock Heidenreich",
+        "status": 0,
+        "arrival": "16:08",
+        "total": 801.69,
+        "pizzas": [
+            {
+                "id": 10,
+                "pizza": "numquam sit quidem",
+                "size": "medium",
+                "qty": 1,
+                "price": 47.01
+            },
+            {
+                "id": 9,
+                "pizza": "pariatur velit necessitatibus",
+                "size": "large",
+                "qty": 12,
+                "price": 62.89
+            }
+        ],
+  "note": null
+}
+```
+
+#### Update an Order [PUT]
+
+* Request (application/json)
+
+``` json
+    {
+	    "delivery_time": 50,
+	    "note": "Motoboy atrasou",
+	    "status": 1
+    }
+```
+
+* Response 200 (application/json)
+
+    - Body
+
+``` json
+    {
+        "id": 1,
+        "client": "Gia Blanda",
+        "status": 1,
+        "arrival": "16:40",
+        "total": 763.91,
+        "pizzas": [
+            {
+                "id": 1,
+                "pizza": "dolorem natus quaerat",
+                "size": "large",
+                "qty": 6,
+                "price": 46.5
+            },
+            {
+                "id": 13,
+                "pizza": "quidem quasi fugit",
+                "size": "large",
+                "qty": 6,
+                "price": 65.06
+            },
+            {
+                "id": 20,
+                "pizza": "ea doloremque quos",
+                "size": "large",
+                "qty": 1,
+                "price": 79.04
+            }
+        ],
+        "note": "Motoboy atrasou"
+    }
+```
+
+#### Delete an Order [DELETE]
+
+* Response 204 (application/json)
+
+#### Add a new pizza to the Order [PUT][/orders/pizza/add/{id}]
+
+* Request (application/json)
+
+``` json
+    {
+	    "pedido": [
+		    {
+		        "pizza_id": 1,
+		        "size": "large",
+		        "qty": 10
+		    },
+		    {
+		        "pizza_id": 2,
+		        "size": "small",
+		        "qty": 3
+		    }
+	    ]
+    }
+```
+
+* Response 200 (application/json)
+
+    - Body
+
+``` json
+    {
+        "id": 1,
+        "client": "Gia Blanda",
+        "status": 1,
+        "arrival": "16:40",
+        "total": 763.91,
+        "pizzas": [
+            {
+                "id": 1,
+                "pizza": "dolorem natus quaerat",
+                "size": "large",
+                "qty": 6,
+                "price": 46.5
+            },
+            {
+                "id": 13,
+                "pizza": "quidem quasi fugit",
+                "size": "large",
+                "qty": 6,
+                "price": 65.06
+            },
+            {
+                "id": 20,
+                "pizza": "ea doloremque quos",
+                "size": "large",
+                "qty": 1,
+                "price": 79.04
+            }
+        ],
+        "note": "Motoboy atrasou"
+    }
 ```
 
