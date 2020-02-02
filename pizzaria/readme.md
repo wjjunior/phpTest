@@ -407,19 +407,55 @@ O BD SQLITE configurado ja está com Clients e Pizzas geradas pelas seeds para d
 
 ``` json
     {
-        "id": 1,
-        "client": "Gia Blanda",
-        "status": 1,
-        "arrival": "16:40",
-        "total": 763.91,
+        "id": 2,
+        "client": "Rogers Romaguera",
+        "status": 0,
+        "arrival": "17:06",
+        "total": 2029.82,
         "pizzas": [
             {
-                "id": 1,
-                "pizza": "dolorem natus quaerat",
-                "size": "large",
-                "qty": 6,
-                "price": 46.5
+                "id": 5,
+                "pizza": "veritatis deserunt alias",
+                "size": "medium",
+                "qty": 19,
+                "price": 100.47
             },
+            {
+                "id": 2,
+                "pizza": "quam et quidem",
+                "size": "small",
+                "qty": 3,
+                "price": 39.24
+            }
+        ],
+        "note": "Pigeon, raising its voice to its children, 'Come."
+    }
+```
+
+#### Remove a pizza from the Order [PUT][/orders/pizza/remove/{id}]
+
+* Request (application/json)
+
+``` json
+    {
+	    "pizza_id": 1,
+	    "size": "large",
+	    "qty": 6
+    }
+```
+
+* Response 200 (application/json)
+
+    - Body
+
+``` json
+    {
+        "id": 1,
+        "client": "Gia Blanda",
+        "status": 0,
+        "arrival": "17:22",
+        "total": 484.91,
+        "pizzas": [
             {
                 "id": 13,
                 "pizza": "quidem quasi fugit",
@@ -435,7 +471,7 @@ O BD SQLITE configurado ja está com Clients e Pizzas geradas pelas seeds para d
                 "price": 79.04
             }
         ],
-        "note": "Motoboy atrasou"
+        "note": "I to get out again. Suddenly she came upon a."
     }
 ```
 
