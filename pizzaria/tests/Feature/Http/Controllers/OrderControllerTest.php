@@ -338,7 +338,14 @@ class OrderControllerTest extends TestCase
             ]
         ]);
 
-        $total = round(($pizza->$size * ($qty + $addQty)) + ($pizza2->$size * $qty) + $order->delivery_price, 2);
+        $total = round(
+            ($pizza->$size * ($qty + $addQty)) +
+                ($pizza2->$size * $qty) +
+                ($pizza3->$size * $qty) +
+                $order->delivery_price,
+            2
+        );
+
         $response->seeJsonEquals([
             'id' => $order->id,
             'client' => $client->name,
