@@ -56,10 +56,9 @@ class Order extends Model implements OrderInterface
             if ($orderPizza) {
                 $orderPizza->pivot->qty += $pedido['qty'];
                 $orderPizza->pivot->save();
-                return $this;
+            } else {
+                $this->pizzas()->save($pizza, ['size' => $pedido['size'], 'qty' => $pedido['qty']]);
             }
-
-            $this->pizzas()->save($pizza, ['size' => $pedido['size'], 'qty' => $pedido['qty']]);
         }
         return $this;
     }
