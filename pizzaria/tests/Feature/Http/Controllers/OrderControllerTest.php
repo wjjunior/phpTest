@@ -307,6 +307,72 @@ class OrderControllerTest extends TestCase
     /**
      * @test
      */
+    public function can_add_same_and_a_new_pizza_to_order()
+    {
+        $faker = Factory::create();
+        $client = $this->create('Client');
+        $pizza = $this->create('Pizza');
+        $pizza2 = $this->create('Pizza');
+        $pizza3 = $this->create('Pizza');
+        $size = $faker->randomElement(['small', 'medium', 'large']);
+        $qty = $faker->numberBetween(1, 10);
+        $addQty = $faker->numberBetween(1, 5);
+        $order = $this->create('Order', ['client_id' => $client->id]);
+        $order->pizzas()->attach([
+            $pizza->id => ['size' => $size, 'qty' => $qty],
+            $pizza2->id => ['size' => $size, 'qty' => $qty],
+        ]);
+
+        $response = $this->json('PUT', "orders/pizza/add/$order->id", [
+            'pedido' => [
+                [
+                    "pizza_id" => $pizza->id,
+                    "size" => $size,
+                    "qty" => $addQty
+                ],
+                [
+                    "pizza_id" => $pizza3->id,
+                    "size" => $size,
+                    "qty" => $qty
+                ]
+            ]
+        ]);
+
+        $total = round(($pizza->$size * ($qty + $addQty)) + ($pizza2->$size * $qty) + $order->delivery_price, 2);
+        $response->seeJsonEquals([
+            'id' => $order->id,
+            'client' => $client->name,
+            'status' => $order->status,
+            'total' => $total,
+            'arrival' => Carbon::now()->addMinutes($order->delivery_time)->format('H:i'),
+            'pizzas' => [
+                [
+                    "id" => $pizza->id,
+                    "pizza" => $pizza->name,
+                    "price" => $pizza->$size,
+                    "size" => $size,
+                    "qty" => $qty + $addQty
+                ], [
+                    "id" => $pizza2->id,
+                    "pizza" => $pizza2->name,
+                    "price" => $pizza2->$size,
+                    "size" => $size,
+                    "qty" => $qty
+                ], [
+                    "id" => $pizza3->id,
+                    "pizza" => $pizza3->name,
+                    "price" => $pizza3->$size,
+                    "size" => $size,
+                    "qty" => $qty
+                ]
+            ],
+            'note' => $order->note
+        ])->assertResponseStatus(200);
+    }
+
+    /**
+     * @test
+     */
     public function can_remove_pizza_from_order()
     {
         $faker = Factory::create();
