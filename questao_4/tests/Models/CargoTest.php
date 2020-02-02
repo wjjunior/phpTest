@@ -19,6 +19,18 @@ class CargoTest extends TestCase
     /**
      * @test
      */
+    public function test_if_id_can_be_assign()
+    {
+
+        $id = uniqid();
+        $this->cargo->setId($id);
+
+        $this->assertEquals($id, $this->cargo->getId());
+    }
+
+    /**
+     * @test
+     */
     public function test_if_description_can_be_assign()
     {
 

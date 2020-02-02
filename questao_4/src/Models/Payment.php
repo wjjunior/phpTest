@@ -106,7 +106,8 @@ class Payment implements PaymentInterface
             array_push($services, [
                 'Descrição' => $cargo->getDescription(),
                 'Peso' => $cargo->getWeight(),
-                'Preço' => $cargo->getPrice()
+                'Preço' => $cargo->getPrice(),
+                'Tipo' => $cargo->getType() === 'liveload' ? 'Carga viva' : 'Bagagem'
             ]);
         }
         return $services;

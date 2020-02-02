@@ -156,6 +156,22 @@ class FlightTest extends TestCase
     /**
      * @test
      */
+    public function test_if_remove_invalid_cargo_id()
+    {
+
+        $cargo = new Cargo($this->faker->words(3, true), $this->faker->randomFloat(2, 1, 100), $this->faker->randomFloat(2, 1, 100), $this->faker->randomElement(['liveload', 'baggage']));
+
+        $this->flight->addCargo($cargo);
+        $this->assertContains($cargo, $this->flight->getCargo());
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->flight->removeCargo(uniqid());
+    }
+
+    /**
+     * @test
+     */
     public function test_if_can_calculate_flight_total()
     {
 
